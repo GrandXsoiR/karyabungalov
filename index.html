@@ -9,17 +9,14 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             background: linear-gradient(to right, #ffecd2, #fcb69f);
-            color: #333;
         }
         h1 {
             color: #333;
-            text-align: center;
         }
         .button-container {
             margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 10px;
         }
         .button-container button {
@@ -60,16 +57,6 @@
         }
         .place-info a:hover {
             background-color: #45a049;
-        }
-        @media (max-width: 600px) {
-            .button-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .button-container button {
-                width: 100%;
-                max-width: 300px;
-            }
         }
     </style>
 </head>
@@ -140,4 +127,54 @@
                 img1: 'iztuzu1.jpg',
                 img2: 'iztuzu2.jpg',
                 desc: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/G%C3%B6kbel,+%C4%B0ZTUZU+PLAJI,+Ortaca%2FMu%C4%9
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/G%C3%B6kbel,+%C4%B0ZTUZU+PLAJI,+Ortaca%2FMu%C4%9Fla/@36.7524722,28.6712325,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14bf88e0da08a73d:0x92291bc5c3786fc!2m2!1d28.6315771!2d36.7769424?entry=ttu'
+            },
+            kille: {
+                title: 'Kille Koyu',
+                img1: 'kille1.jpg',
+                img2: 'kille2.jpg',
+                desc: 'Kille Koyu, Göcek\'te bulunan ve sakinliği ile bilinen bir koydur. Doğa ile iç içe bir ortam sunar.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/%C5%9Eerefler,+Kille+Koyu,+Dalaman%2FMu%C4%9Fla/@36.74783,28.7888905,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c06f20be09058b:0x3d38d7484137883d!2m2!1d28.8766838!2d36.7000355?entry=ttu'
+            },
+            kukurt: {
+                title: 'Kükürt Kaplıcaları',
+                img1: 'kukurt1.jpg',
+                img2: 'kukurt2.jpg',
+                desc: 'Kükürt Kaplıcaları, termal suları ve sağlık turizmi ile ünlüdür. Ziyaretçilere rahatlama ve tedavi imkanı sunar.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Kapukarg%C4%B1n,+Kap%C4%B1karg%C4%B1n+K%C3%BCk%C3%BCrt+Kapl%C4%B1cas%C4%B1,+Dalaman%2FMu%C4%9Fla/@36.7379277,28.7740748,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c071a0bff2b7f9:0xa5f68a7d24c73bdb!2m2!1d28.8144843!2d36.7259378?entry=ttu'
+            },
+            market: {
+                title: 'En Yakın Market',
+                img1: 'market1.jpg',
+                img2: 'market2.jpg',
+                desc: 'En yakın market, günlük ihtiyaçlarınızı karşılayabileceğiniz ve çeşitli ürünler bulabileceğiniz bir markettir.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Ege,+Airport+Market+Dalaman,+D555,+Dalaman%2FMu%C4%9Fla/@36.7461101,28.8079802,15.5z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c07145f4cabb1d:0xb3c2faa1a1166937!2m2!1d28.8045687!2d36.7490331?entry=ttu'
+            },
+            havalimani: {
+                title: 'Dalaman Havalimanı',
+                img1: 'havalimani1.jpg',
+                img2: 'havalimani2.jpg',
+                desc: 'Dalaman Havalimanı, bölgenin ana havaalanıdır ve yurt içi ve yurt dışı uçuşlar için kullanılır.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Ege,+Dalaman+Havaliman%C4%B1,+Dalaman%2FMu%C4%9Fla/@36.7228066,28.7743855,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c0715d8f83456f:0xcaf246be6efae4da!2m2!1d28.7933172!2d36.7181305?entry=ttu'
+            },
+            yuvarlak: {
+                title: 'Yuvarlak Çay',
+                img1: 'yuvarlak1.jpg',
+                img2: 'yuvarlak2.jpg',
+                desc: 'Yuvarlak Çay, doğal güzellikleri ve serinletici suları ile ünlü bir piknik ve yüzme alanıdır.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/P%C4%B1nar,+Yuvarlak%C3%A7ay,+K%C3%B6yce%C4%9Fiz%2FMu%C4%9Fla/@36.8838796,28.7261546,12.25z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c087752de3c3c7:0x2e57062e86dd0219!2m2!1d28.8102535!2d36.9377255?entry=ttu'
+            }
+        };
+
+        function showInfo(placeKey) {
+            const place = places[placeKey];
+            document.getElementById('place-title').innerText = place.title;
+            document.getElementById('place-img1').src = place.img1;
+            document.getElementById('place-img2').src = place.img2;
+            document.getElementById('place-desc').innerText = place.desc;
+            document.getElementById('place-map').href = place.map;
+            document.getElementById('place-info').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
