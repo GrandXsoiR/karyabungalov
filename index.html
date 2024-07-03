@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakınlardaki Tatil Yerleri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .button-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #ff4a33;
+        }
+        .place-info {
+            display: none;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .place-info img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        .place-info a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .place-info a:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .button-container button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Yakınlardaki Tatil Yerleri</h1>
+    
+    <div class="button-container">
+        <button onclick="showInfo('sarsala')">Sarsala Koyu</button>
+        <button onclick="showInfo('sarigerme')">Sarıgerme Plajı</button>
+        <button onclick="showInfo('kayacik')">Kayacık Sahili</button>
+        <button onclick="showInfo('gocek')">Göcek Marina</button>
+        <button onclick="showInfo('dalyan')">Dalyan</button>
+        <button onclick="showInfo('iztuzu')">İztuzu Plajı</button>
+        <button onclick="showInfo('kille')">Kille Koyu</button>
+        <button onclick="showInfo('kukurt')">Kükürt Kaplıcaları</button>
+        <button onclick="showInfo('market')">En Yakın Market</button>
+        <button onclick="showInfo('havalimani')">Dalaman Havalimanı</button>
+        <button onclick="showInfo('yuvarlak')">Yuvarlak Çay</button>
+    </div>
+
+    <div id="place-info" class="place-info">
+        <h2 id="place-title"></h2>
+        <img id="place-img1" src="" alt="">
+        <img id="place-img2" src="" alt="">
+        <p id="place-desc"></p>
+        <a id="place-map" href="" target="_blank">Konumu Görüntüle</a>
+    </div>
+
+    <script>
+        const places = {
+            sarsala: {
+                title: 'Sarsala Koyu',
+                img1: 'sarsala1.jpg',
+                img2: 'sarsala2.jpg',
+                desc: 'Sarsala Koyu, Dalaman\'da bulunan ve doğal güzellikleriyle ünlü bir koydur. Plajı ve berrak denizi ile ziyaretçilerin ilgisini çeker.',
+                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+Sarsala+Koyu,+48770+Dalaman%2FMu%C4%9Fla/@36.6635742,28.8090142,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0727079a6ac03:0xef8abe1ffe588960!2m2!1d28.8502137!2d36.6635124?hl=tr&entry=ttu'
+            },
+            sarigerme: {
+                title: 'Sarıgerme Plajı',
+                img1: 'sarigerme1.jpg',
+                img2: 'sarigerme2.jpg',
+                desc: 'Sarıgerme Plajı, geniş kumsalı ve temiz denizi ile ünlüdür. Su sporları ve diğer aktiviteler için ideal bir mekandır.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/sar%C4%B1germe/@36.7376546,28.6654068,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c075bf2c01f925:0xfc8821371c89732!2m2!1d28.701944!2d36.71?entry=ttu'
+            },
+            kayacik: {
+                title: 'Kayacık Sahili',
+                img1: 'kayacik1.jpg',
+                img2: 'kayacik2.jpg',
+                desc: 'Kayacık Sahili, sakin ve huzurlu bir ortam sunar. Denizin tadını çıkarabileceğiniz güzel bir sahildir.',
+                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+48770+Dalaman%2FMu%C4%9Fla/@36.6870258,28.7040248,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c07385b073f42f:0x2fd3476c55016890!2m2!1d28.7864259!2d36.6870542?hl=tr&entry=ttu'
+            },
+            gocek: {
+                title: 'Göcek Marina',
+                img1: 'gocek1.jpg',
+                img2: 'gocek2.jpg',
+                desc: 'Göcek Marina, lüks yatların ve teknelerin bulunduğu bir marinadır. Restoranlar ve kafelerle çevrili bir bölgedir.',
+                map: 'https://www.google.com/maps/dir//g%C3%B6cek/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c065fa398fef15:0x8de56199ebeef49d?sa=X&ved=1t:155782&ictx=111'
+            },
+            dalyan: {
+                title: 'Dalyan',
+                img1: 'dalyan1.jpg',
+                img2: 'dalyan2.jpg',
+                desc: 'Dalyan, tarihi ve doğal güzellikleri ile ünlüdür. Caretta caretta kaplumbağaları ile ünlü İztuzu Plajı burada bulunur.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Dalyan,+Ortaca%2FMu%C4%9Fla/@36.7865512,28.6447828,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14bf87d9a39c1afd:0x84dd3564569e4dd2!2m2!1d28.642607!2d36.834258?entry=ttu'
+            },
+            iztuzu: {
+                title: 'İztuzu Plajı',
+                img1: 'iztuzu1.jpg',
+                img2: 'iztuzu2.jpg',
+                desc: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/G%C3%B6kbel,+%C4%B0ZTUZU+PLAJI,+Ortaca%2FMu%C4%9
