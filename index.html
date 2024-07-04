@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İstikamet ...</title>
+    <title>Dalaman ve Çevresinde Görülecek Yerler</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -18,7 +18,6 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-bottom: 2px solid #333;
             padding-bottom: 10px;
             width: 100%;
             max-width: 600px;
@@ -86,10 +85,33 @@
         .place-info a:hover {
             background-color: #45a049;
         }
+        .flag-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .flag-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .flag-container img {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
-    <h1>İstikamet ...</h1>
+    <div class="flag-container">
+        <button onclick="changeLanguage('tr')"><img src="turkish-flag.png" alt="TR"></button>
+        <button onclick="changeLanguage('en')"><img src="uk-flag.png" alt="EN"></button>
+        <button onclick="changeLanguage('ru')"><img src="russian-flag.png" alt="RU"></button>
+    </div>
+
+    <h1>Dalaman ve Çevresinde Görülecek Yerler</h1>
     
     <div class="button-container">
         <button onclick="showInfo('sarsala')"><span>Sarsala Koyu</span></button>
@@ -97,6 +119,7 @@
         <button onclick="showInfo('kayacik')"><span>Kayacık Sahili</span></button>
         <button onclick="showInfo('gocek')"><span>Göcek Marina</span></button>
         <button onclick="showInfo('dalyan')"><span>Dalyan</span></button>
+        <button onclick="showInfo('kaunos')"><span>Kaunos Antik Kenti</span></button>
         <button onclick="showInfo('iztuzu')"><span>İztuzu Plajı</span></button>
         <button onclick="showInfo('kille')"><span>Kille Koyu</span></button>
         <button onclick="showInfo('kukurt')"><span>Kükürt Kaplıcaları</span></button>
@@ -116,92 +139,221 @@
     <script>
         const places = {
             sarsala: {
-                title: 'Sarsala Koyu',
+                title: {
+                    tr: 'Sarsala Koyu',
+                    en: 'Sarsala Bay',
+                    ru: 'Залив Сарсала'
+                },
                 img1: 'sarsala1.jpg',
                 img2: 'sarsala2.jpg',
-                desc: 'Sarsala Koyu, Dalaman\'da bulunan ve doğal güzellikleriyle ünlü bir koydur. Plajı ve berrak denizi ile ziyaretçilerin ilgisini çeker.',
+                desc: {
+                    tr: 'Sarsala Koyu, Dalaman\'da bulunan ve doğal güzellikleriyle ünlü bir koydur. Plajı ve berrak denizi ile ziyaretçilerin ilgisini çeker.',
+                    en: 'Sarsala Bay is a famous bay in Dalaman known for its natural beauty. The beach and clear sea attract visitors.',
+                    ru: 'Залив Сарсала - известный залив в Даламане, известный своей природной красотой. Пляж и чистое море привлекают посетителей.'
+                },
                 map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+Sarsala+Koyu,+48770+Dalaman%2FMu%C4%9Fla/@36.6635742,28.8090142,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0727079a6ac03:0xef8abe1ffe588960!2m2!1d28.8502137!2d36.6635124?hl=tr&entry=ttu'
             },
             sarigerme: {
-                title: 'Sarıgerme Plajı',
+                title: {
+                    tr: 'Sarıgerme Plajı',
+                    en: 'Sarigerme Beach',
+                    ru: 'Пляж Саригерме'
+                },
                 img1: 'sarigerme1.jpg',
                 img2: 'sarigerme2.jpg',
-                desc: 'Sarıgerme Plajı, geniş kumsalı ve temiz denizi ile ünlüdür. Su sporları ve diğer aktiviteler için ideal bir mekandır.',
+                desc: {
+                    tr: 'Sarıgerme Plajı, geniş kumsalı ve temiz denizi ile ünlüdür. Su sporları ve diğer aktiviteler için ideal bir mekandır.',
+                    en: 'Sarigerme Beach is famous for its wide sandy beach and clean sea. It is an ideal place for water sports and other activities.',
+                    ru: 'Пляж Саригерме славится своими широкими песчаными пляжами и чистым морем. Это идеальное место для водных видов спорта и других развлечений.'
+                },
                 map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/sar%C4%B1germe/@36.7376546,28.6654068,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c075bf2c01f925:0xfc8821371c89732!2m2!1d28.701944!2d36.71?entry=ttu'
             },
             kayacik: {
-                title: 'Kayacık Sahili',
+                title: {
+                    tr: 'Kayacık Sahili',
+                    en: 'Kayacik Beach',
+                    ru: 'Пляж Каяджик'
+                },
                 img1: 'kayacik1.jpg',
                 img2: 'kayacik2.jpg',
-                desc: 'Kayacık Sahili, sakin ve huzurlu bir ortam sunar. Denizin tadını çıkarabileceğiniz güzel bir sahildir.',
-                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+48770+Dalaman%2FMu%C4%9Fla/@36.6870258,28.7040248,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c07385b073f42f:0x2fd3476c55016890!2m2!1d28.7864259!2d36.6870542?hl=tr&entry=ttu'
+                desc: {
+                    tr: 'Kayacık Sahili, sakin ve huzurlu bir ortam sunar. Yüzme ve güneşlenme için mükemmeldir.',
+                    en: 'Kayacik Beach offers a quiet and peaceful environment. It is perfect for swimming and sunbathing.',
+                    ru: 'Пляж Каяджик предлагает тихую и спокойную обстановку. Это идеальное место для купания и загорания.'
+                },
+                map: 'https://www.google.com/maps/dir//Kayacık+Sahili,+Kapıkargın,+48770+Dalaman%2FMuğla/@36.7265035,28.7779445,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c072e7d43339c5:0x2c39333c9ffab779!2m2!1d28.795315!2d36.7265744?hl=tr&entry=ttu'
             },
             gocek: {
-                title: 'Göcek Marina',
+                title: {
+                    tr: 'Göcek Marina',
+                    en: 'Gocek Marina',
+                    ru: 'Марина Гечек'
+                },
                 img1: 'gocek1.jpg',
                 img2: 'gocek2.jpg',
-                desc: 'Göcek Marina, lüks yatların ve teknelerin bulunduğu bir marinadır. Restoranlar ve kafelerle çevrili bir bölgedir.',
-                map: 'https://www.google.com/maps/dir//g%C3%B6cek/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c065fa398fef15:0x8de56199ebeef49d?sa=X&ved=1t:155782&ictx=111'
+                desc: {
+                    tr: 'Göcek Marina, lüks yatlar ve tekneler için popüler bir durak noktasıdır. Çevresinde birçok restoran ve kafe bulunmaktadır.',
+                    en: 'Gocek Marina is a popular stop for luxury yachts and boats. There are many restaurants and cafes around it.',
+                    ru: 'Марина Гечек - популярная остановка для роскошных яхт и лодок. Вокруг него много ресторанов и кафе.'
+                },
+                map: 'https://www.google.com/maps/dir//G%C3%B6cek+Marina,+Göcek+Mahallesi,+48310+Fethiye%2FMu%C4%9Fla/@36.750965,28.942626,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c054c93b6ee799:0x54c98cbb4b16f20!2m2!1d28.932115!2d36.749451?hl=tr&entry=ttu'
             },
             dalyan: {
-                title: 'Dalyan',
+                title: {
+                    tr: 'Dalyan',
+                    en: 'Dalyan',
+                    ru: 'Дальян'
+                },
                 img1: 'dalyan1.jpg',
                 img2: 'dalyan2.jpg',
-                desc: 'Dalyan, tarihi ve doğal güzellikleri ile ünlüdür. Caretta caretta kaplumbağaları ile ünlü İztuzu Plajı burada bulunur.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Dalyan,+Ortaca%2FMu%C4%9Fla/@36.7865512,28.6447828,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c05ef1e40e9b0b:0x8ab3e065fc5e1868!2m2!1d28.646948!2d36.83572?entry=ttu'
+                desc: {
+                    tr: 'Dalyan, tarihi ve doğal güzellikleri ile ünlüdür. Dalyan Nehri boyunca tekne turları ve çamur banyoları popülerdir.',
+                    en: 'Dalyan is famous for its historical and natural beauties. Boat tours along the Dalyan River and mud baths are popular.',
+                    ru: 'Дальян славится своими историческими и природными красотами. Популярны лодочные туры по реке Дальян и грязевые ванны.'
+                },
+                map: 'https://www.google.com/maps/dir//Dalyan,+Ortaca%2FMuğla/@36.8341827,28.6410218,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c05ef1e40e9b0b:0x8ab3e065fc5e1868!2m2!1d28.646948!2d36.83572?entry=ttu'
+            },
+            kaunos: {
+                title: {
+                    tr: 'Kaunos Antik Kenti',
+                    en: 'Kaunos Ancient City',
+                    ru: 'Древний город Каунос'
+                },
+                img1: 'kaunos1.jpg',
+                img2: 'kaunos2.jpg',
+                desc: {
+                    tr: 'Kaunos Antik Kenti, tarihi ve arkeolojik öneme sahip bir antik kenttir. Kalıntılar arasında tiyatro, kilise ve hamam bulunmaktadır.',
+                    en: 'Kaunos Ancient City is an ancient city of historical and archaeological importance. The ruins include a theater, church, and baths.',
+                    ru: 'Древний город Каунос - древний город, имеющий историческое и археологическое значение. Среди руин находятся театр, церковь и бани.'
+                },
+                map: 'https://www.google.com/maps/dir//Kaunos+Antik+Kenti,+Kaunos+Antik+Kenti+Dalyan+Ortaca,+Muğla/@36.8291724,28.6304183,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c05920dc870f47:0x158ce2d54b86c5e7!2m2!1d28.6304536!2d36.8289866?entry=ttu'
             },
             iztuzu: {
-                title: 'İztuzu Plajı',
+                title: {
+                    tr: 'İztuzu Plajı',
+                    en: 'Iztuzu Beach',
+                    ru: 'Пляж Изтузу'
+                },
                 img1: 'iztuzu1.jpg',
                 img2: 'iztuzu2.jpg',
-                desc: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
+                desc: {
+                    tr: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
+                    en: 'Iztuzu Beach is a famous beach in Dalyan where Caretta Caretta turtles nest.',
+                    ru: 'Пляж Изтузу - известный пляж в Дальяне, где гнездятся черепахи каретта каретта.'
+                },
                 map: 'https://www.google.com/maps/dir//İztuzu+Plajı/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x149d073b9839f287:0xc5a7ff0c6e875b21?sa=X&ved=2ahUKEwj1xv7EkLrxAhXyQhUIHQ6tDwEQ9RcwI3oECEcQBQ'
             },
             kille: {
-                title: 'Kille Koyu',
+                title: {
+                    tr: 'Kille Koyu',
+                    en: 'Kille Bay',
+                    ru: 'Залив Килле'
+                },
                 img1: 'kille1.jpg',
                 img2: 'kille2.jpg',
-                desc: 'Kille Koyu, Dalaman\'ın güzel koylarından biridir. Sakin ve doğal güzellikleri ile bilinir.',
+                desc: {
+                    tr: 'Kille Koyu, Dalaman\'ın güzel koylarından biridir. Sakin ve doğal güzellikleri ile bilinir.',
+                    en: 'Kille Bay is one of the beautiful bays of Dalaman. It is known for its peaceful and natural beauty.',
+                    ru: 'Залив Килле - один из красивых заливов Даламана. Он известен своей спокойной и природной красотой.'
+                },
                 map: 'https://www.google.com/maps/dir//Kille+Koyu/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x149da57ac0924675:0x6348ef036b38ec67?sa=X&ved=2ahUKEwi9idO0jZ_xAhWjhP0HHS4jDeQQ9RcwFXoECEUQBQ'
             },
             kukurt: {
-                title: 'Kükürt Kaplıcaları',
+                title: {
+                    tr: 'Kükürt Kaplıcaları',
+                    en: 'Sulfur Springs',
+                    ru: 'Серные источники'
+                },
                 img1: 'kukurt1.jpg',
                 img2: 'kukurt2.jpg',
-                desc: 'Kükürt Kaplıcaları, sağlık ve doğal tedavi için popüler olan bir kaplıcadır. Termal suları ile ünlüdür.',
+                desc: {
+                    tr: 'Kükürt Kaplıcaları, sağlık ve doğal tedavi için popüler olan bir kaplıcadır. Termal suları ile ünlüdür.',
+                    en: 'Sulfur Springs is a popular hot spring for health and natural treatment. It is famous for its thermal waters.',
+                    ru: 'Серные источники - популярный горячий источник для здоровья и природного лечения. Он известен своими термальными водами.'
+                },
                 map: 'https://www.google.com/maps/dir//Kükürt+Kaplıcaları/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14b1a3c570c931e9:0x5744c1f24e8b6a79?sa=X&ved=2ahUKEwjo8fT0jZ_xAhUliOAKHfHmDDUQ9RcwGHoECD8QBQ'
             },
             market: {
-                title: 'En Yakın Market',
+                title: {
+                    tr: 'En Yakın Market',
+                    en: 'Nearest Market',
+                    ru: 'Ближайший магазин'
+                },
                 img1: 'market1.jpg',
                 img2: 'market2.jpg',
-                desc: 'En yakın market, temel ihtiyaçlarınızı karşılayabileceğiniz bir markettir. Çeşitli ürünler sunmaktadır.',
-                map: 'https://www.google.com/maps/dir//market/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c06fb828803f23:0xf4b20b32c2b1f3b8?sa=X&ved=2ahUKEwiy-u6wjZ_xAhWytIsKHQQzDgIQ9RcwEXoECEsQBQ'
+                desc: {
+                    tr: 'En yakın market, temel ihtiyaçlarınızı karşılayabileceğiniz bir markettir. Çeşitli ürünler sunmaktadır.',
+                    en: 'The nearest market is a place where you can meet your basic needs. It offers various products.',
+                    ru: 'Ближайший магазин - это место, где вы можете удовлетворить свои основные потребности. Он предлагает различные продукты.'
+                },
+                map: 'https://www.google.com/maps/dir//En+Yakın+Market/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14b1a3c570c931e9:0x5744c1f24e8b6a79?sa=X&ved=2ahUKEwjo8fT0jZ_xAhUliOAKHfHmDDUQ9RcwGHoECD8QBQ'
             },
             havalimani: {
-                title: 'Dalaman Havalimanı',
+                title: {
+                    tr: 'Dalaman Havalimanı',
+                    en: 'Dalaman Airport',
+                    ru: 'Аэропорт Даламан'
+                },
                 img1: 'havalimani1.jpg',
                 img2: 'havalimani2.jpg',
-                desc: 'Dalaman Havalimanı, bölgeye ulaşım sağlayan ana havalimanıdır. İç ve dış hatlar uçuşları düzenlenmektedir.',
-                map: 'https://www.google.com/maps/dir//Dalaman+Havalimanı/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c0724ab7623661:0x2e161adb28e9e131?sa=X&ved=2ahUKEwjM2pK3jZ_xAhVJr6QKHVu_AboQ9RcwEHoECEkQBQ'
+                desc: {
+                    tr: 'Dalaman Havalimanı, bölgenin en önemli ulaşım noktalarından biridir. Yurtiçi ve yurtdışı uçuşlar sunmaktadır.',
+                    en: 'Dalaman Airport is one of the most important transportation hubs in the region. It offers domestic and international flights.',
+                    ru: 'Аэропорт Даламан - один из самых важных транспортных узлов региона. Он предлагает внутренние и международные рейсы.'
+                },
+                map: 'https://www.google.com/maps/dir//Dalaman+Havalimanı/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14b1a3c570c931e9:0x5744c1f24e8b6a79?sa=X&ved=2ahUKEwjo8fT0jZ_xAhUliOAKHfHmDDUQ9RcwGHoECD8QBQ'
             },
             yuvarlak: {
-                title: 'Yuvarlak Çay',
+                title: {
+                    tr: 'Yuvarlak Çay',
+                    en: 'Yuvarlak Cay',
+                    ru: 'Юварлак Чай'
+                },
                 img1: 'yuvarlak1.jpg',
                 img2: 'yuvarlak2.jpg',
-                desc: 'Yuvarlak Çay, doğal güzelliği ve serin suyu ile bilinen bir doğa harikasıdır. Piknik ve doğa yürüyüşleri için idealdir.',
-                map: 'https://www.google.com/maps/dir//Yuvarlak+%C3%87ay/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c0724ab7623661:0x2e161adb28e9e131?sa=X&ved=2ahUKEwjM2pK3jZ_xAhVJr6QKHVu_AboQ9RcwEHoECEkQBQ'
+                desc: {
+                    tr: 'Yuvarlak Çay, doğal güzellikleri ve serinletici sularıyla ünlüdür. Piknik ve doğa yürüyüşleri için ideal bir yerdir.',
+                    en: 'Yuvarlak Cay is famous for its natural beauty and refreshing waters. It is an ideal place for picnics and nature walks.',
+                    ru: 'Юварлак Чай славится своей природной красотой и освежающими водами. Это идеальное место для пикников и прогулок на природе.'
+                },
+                map: 'https://www.google.com/maps/dir//Yuvarlak+Çay/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14b1a3c570c931e9:0x5744c1f24e8b6a79?sa=X&ved=2ahUKEwjo8fT0jZ_xAhUliOAKHfHmDDUQ9RcwGHoECD8QBQ'
             }
         };
 
         function showInfo(place) {
-            const info = places[place];
-            document.getElementById('place-title').textContent = info.title;
-            document.getElementById('place-img1').src = info.img1;
-            document.getElementById('place-img2').src = info.img2;
-            document.getElementById('place-desc').textContent = info.desc;
-            document.getElementById('place-map').href = info.map;
+            const placeData = places[place];
+            const lang = document.documentElement.lang || 'tr';
+
+            document.getElementById('place-title').innerText = placeData.title[lang];
+            document.getElementById('place-img1').src = placeData.img1;
+            document.getElementById('place-img2').src = placeData.img2;
+            document.getElementById('place-desc').innerText = placeData.desc[lang];
+            document.getElementById('place-map').href = placeData.map;
+
             document.getElementById('place-info').style.display = 'block';
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function changeLanguage(language) {
+            document.documentElement.lang = language;
+            document.querySelector('h1').innerText = {
+                tr: 'Dalaman ve Çevresinde Görülecek Yerler',
+                en: 'Places to See in Dalaman and Surroundings',
+                ru: 'Места для посещения в Даламане и его окрестностях'
+            }[language];
+
+            document.querySelectorAll('.button-container button span').forEach((button, index) => {
+                const placeKeys = Object.keys(places);
+                button.innerText = places[placeKeys[index]].title[language];
+            });
+
+            const currentPlace = document.getElementById('place-info').style.display === 'block'
+                ? Object.keys(places).find(place => places[place].title[document.documentElement.lang] === document.getElementById('place-title').innerText)
+                : null;
+
+            if (currentPlace) {
+                showInfo(currentPlace);
+            }
         }
     </script>
 </body>
