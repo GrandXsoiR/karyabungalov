@@ -8,7 +8,11 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            background-image: url('background.png'); /* Arka plan resmi */
+            background-size: cover; /* Resmi tam ekran yapar */
+            background-position: center; /* Resmi ortalar */
+            background-attachment: fixed; /* Resmi sabitler */
+            color: white; /* Yazı rengini beyaz yapar */
         }
         h1 {
             color: #333;
@@ -35,10 +39,11 @@
         .place-info {
             display: none;
             margin-top: 20px;
-            background: white;
+            background: rgba(255, 255, 255, 0.8); /* Beyaz arka plan ama biraz saydam */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black; /* Bilgi kutusundaki yazı rengini siyah yapar */
         }
         .place-info img {
             max-width: 100%;
