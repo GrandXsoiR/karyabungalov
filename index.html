@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yakınlardaki Tatil Yerleri</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 20px;
-            background-image: url('background.png'); /* Arka plan resmi */
-            background-size: cover; /* Resmi tam ekran yapar */
-            background-position: center; /* Resmi ortalar */
-            background-attachment: fixed; /* Resmi sabitler */
-            color: white; /* Yazı rengini beyaz yapar */
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
         }
         h1 {
             color: #333;
@@ -20,30 +22,39 @@
         .button-container {
             margin-bottom: 20px;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
         }
         .button-container button {
             padding: 10px 20px;
             font-size: 16px;
-            border: none;
-            background-color: #ff6f61;
-            color: white;
+            border: 1px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.75); /* %75 şeffaflık */
+            color: black;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
+            display: flex;
+            align-items: center;
         }
         .button-container button:hover {
-            background-color: #ff4a33;
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+        }
+        .button-container button::before {
+            content: '•'; /* Madde işareti */
+            margin-right: 10px;
+            font-size: 20px;
+            color: black;
         }
         .place-info {
             display: none;
             margin-top: 20px;
-            background: rgba(255, 255, 255, 0.8); /* Beyaz arka plan ama biraz saydam */
+            background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: black; /* Bilgi kutusundaki yazı rengini siyah yapar */
+            color: black;
         }
         .place-info img {
             max-width: 100%;
@@ -131,8 +142,8 @@
                 title: 'İztuzu Plajı',
                 img1: 'iztuzu1.jpg',
                 img2: 'iztuzu2.jpg',
-                desc: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/G%C3%B6kbel,+%C4%B0ZTUZU+PLAJI,+Ortaca%2FMu%C4%9Fla/@36.7524722,28.6712325,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14bf88e0da08a73d:0x92291bc5c3786fc!2m2!1d28.6315771!2d36.7769424?entry=ttu'
+                desc: 'İztuzu Plajı, caretta caretta kaplumbağalarının yumurtlama alanıdır. Uzun kumsalı ve doğal güzellikleri ile ünlüdür.',
+                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/%C4%B0ztuzu+Plaj%C4%B1,+Dalyan+Bo%C4%9Faz%C4%B1+Mevkii+Dalyan+Mahallesi,+Ortaca%2FMu%C4%9Fla/@36.778848,28.6254046,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14bf88e0da08a73d:0x92291bc5c3786fc!2m2!1d28.6315771!2d36.7769424?entry=ttu'
             },
             kille: {
                 title: 'Kille Koyu',
