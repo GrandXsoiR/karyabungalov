@@ -3,58 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yakınlardaki Tatil Yerleri</title>
+    <title>İstikamet ...</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 20px;
-            background-image: url('background.png');
+            background: url('background.png') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
         }
         h1 {
             color: #333;
+            text-align: center;
         }
         .button-container {
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            align-items: center;
         }
         .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 6px 12px;
+            font-size: 13px;
             border: 1px solid #ccc;
-            background-color: rgba(255, 255, 255, 0.75); /* %75 şeffaflık */
-            color: black;
+            background-color: rgba(255, 255, 255, 0.75);
+            color: #333;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-bottom: 5px;
+            width: 180px;
+            text-align: left;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: bold;
             display: flex;
+            justify-content: space-between;
             align-items: center;
+        }
+        .button-container button::before {
+            content: '•';
+            color: #333;
+            position: absolute;
+            left: 8px;
+        }
+        .button-container button span {
+            display: inline-block;
+            text-align: center;
         }
         .button-container button:hover {
             background-color: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
-        }
-        .button-container button::before {
-            content: '•'; /* Madde işareti */
-            margin-right: 10px;
-            font-size: 20px;
-            color: black;
+            border-color: #999;
         }
         .place-info {
             display: none;
             margin-top: 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: black;
+            text-align: center;
         }
         .place-info img {
             max-width: 100%;
@@ -77,20 +84,20 @@
     </style>
 </head>
 <body>
-    <h1>Yakınlardaki Tatil Yerleri</h1>
+    <h1>İstikamet ...</h1>
     
     <div class="button-container">
-        <button onclick="showInfo('sarsala')">Sarsala Koyu</button>
-        <button onclick="showInfo('sarigerme')">Sarıgerme Plajı</button>
-        <button onclick="showInfo('kayacik')">Kayacık Sahili</button>
-        <button onclick="showInfo('gocek')">Göcek Marina</button>
-        <button onclick="showInfo('dalyan')">Dalyan</button>
-        <button onclick="showInfo('iztuzu')">İztuzu Plajı</button>
-        <button onclick="showInfo('kille')">Kille Koyu</button>
-        <button onclick="showInfo('kukurt')">Kükürt Kaplıcaları</button>
-        <button onclick="showInfo('market')">En Yakın Market</button>
-        <button onclick="showInfo('havalimani')">Dalaman Havalimanı</button>
-        <button onclick="showInfo('yuvarlak')">Yuvarlak Çay</button>
+        <button onclick="showInfo('sarsala')"><span>Sarsala Koyu</span></button>
+        <button onclick="showInfo('sarigerme')"><span>Sarıgerme Plajı</span></button>
+        <button onclick="showInfo('kayacik')"><span>Kayacık Sahili</span></button>
+        <button onclick="showInfo('gocek')"><span>Göcek Marina</span></button>
+        <button onclick="showInfo('dalyan')"><span>Dalyan</span></button>
+        <button onclick="showInfo('iztuzu')"><span>İztuzu Plajı</span></button>
+        <button onclick="showInfo('kille')"><span>Kille Koyu</span></button>
+        <button onclick="showInfo('kukurt')"><span>Kükürt Kaplıcaları</span></button>
+        <button onclick="showInfo('market')"><span>En Yakın Market</span></button>
+        <button onclick="showInfo('havalimani')"><span>Dalaman Havalimanı</span></button>
+        <button onclick="showInfo('yuvarlak')"><span>Yuvarlak Çay</span></button>
     </div>
 
     <div id="place-info" class="place-info">
@@ -142,53 +149,53 @@
                 title: 'İztuzu Plajı',
                 img1: 'iztuzu1.jpg',
                 img2: 'iztuzu2.jpg',
-                desc: 'İztuzu Plajı, caretta caretta kaplumbağalarının yumurtlama alanıdır. Uzun kumsalı ve doğal güzellikleri ile ünlüdür.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/%C4%B0ztuzu+Plaj%C4%B1,+Dalyan+Bo%C4%9Faz%C4%B1+Mevkii+Dalyan+Mahallesi,+Ortaca%2FMu%C4%9Fla/@36.778848,28.6254046,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14bf88e0da08a73d:0x92291bc5c3786fc!2m2!1d28.6315771!2d36.7769424?entry=ttu'
+                desc: 'İztuzu Plajı, Dalyan\'da bulunan ve caretta caretta kaplumbağalarının yumurtlama alanı olan ünlü bir plajdır.',
+                map: 'https://www.google.com/maps/dir//İztuzu+Plajı/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x149d073b9839f287:0xc5a7ff0c6e875b21?sa=X&ved=2ahUKEwj1xv7EkLrxAhXyQhUIHQ6tDwEQ9RcwI3oECEcQBQ'
             },
             kille: {
                 title: 'Kille Koyu',
                 img1: 'kille1.jpg',
                 img2: 'kille2.jpg',
-                desc: 'Kille Koyu, Göcek\'te bulunan ve sakinliği ile bilinen bir koydur. Doğa ile iç içe bir ortam sunar.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/%C5%9Eerefler,+Kille+Koyu,+Dalaman%2FMu%C4%9Fla/@36.74783,28.7888905,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c06f20be09058b:0x3d38d7484137883d!2m2!1d28.8766838!2d36.7000355?entry=ttu'
+                desc: 'Kille Koyu, Dalaman\'ın güzel koylarından biridir. Sakin ve doğal güzellikleri ile bilinir.',
+                map: 'https://www.google.com/maps/dir//Kille+Koyu/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x149da57ac0924675:0x6348ef036b38ec67?sa=X&ved=2ahUKEwi9idO0jZ_xAhWjhP0HHS4jDeQQ9RcwFXoECEUQBQ'
             },
             kukurt: {
                 title: 'Kükürt Kaplıcaları',
                 img1: 'kukurt1.jpg',
                 img2: 'kukurt2.jpg',
-                desc: 'Kükürt Kaplıcaları, termal suları ve sağlık turizmi ile ünlüdür. Ziyaretçilere rahatlama ve tedavi imkanı sunar.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Kapukarg%C4%B1n,+Kap%C4%B1karg%C4%B1n+K%C3%BCk%C3%BCrt+Kapl%C4%B1cas%C4%B1,+Dalaman%2FMu%C4%9Fla/@36.7379277,28.7740748,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c071a0bff2b7f9:0xa5f68a7d24c73bdb!2m2!1d28.8144843!2d36.7259378?entry=ttu'
+                desc: 'Kükürt Kaplıcaları, sağlık ve doğal tedavi için popüler olan bir kaplıcadır. Termal suları ile ünlüdür.',
+                map: 'https://www.google.com/maps/dir//Kükürt+Kaplıcaları/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14b1a3c570c931e9:0x5744c1f24e8b6a79?sa=X&ved=2ahUKEwjo8fT0jZ_xAhUliOAKHfHmDDUQ9RcwGHoECD8QBQ'
             },
             market: {
                 title: 'En Yakın Market',
                 img1: 'market1.jpg',
                 img2: 'market2.jpg',
-                desc: 'En yakın market, günlük ihtiyaçlarınızı karşılayabileceğiniz ve çeşitli ürünler bulabileceğiniz bir markettir.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Ege,+Airport+Market+Dalaman,+D555,+Dalaman%2FMu%C4%9Fla/@36.7461101,28.8079802,15.5z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c07145f4cabb1d:0xb3c2faa1a1166937!2m2!1d28.8045687!2d36.7490331?entry=ttu'
+                desc: 'En yakın market, temel ihtiyaçlarınızı karşılayabileceğiniz bir markettir. Çeşitli ürünler sunmaktadır.',
+                map: 'https://www.google.com/maps/dir//market/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c06fb828803f23:0xf4b20b32c2b1f3b8?sa=X&ved=2ahUKEwiy-u6wjZ_xAhWytIsKHQQzDgIQ9RcwEXoECEsQBQ'
             },
             havalimani: {
                 title: 'Dalaman Havalimanı',
                 img1: 'havalimani1.jpg',
                 img2: 'havalimani2.jpg',
-                desc: 'Dalaman Havalimanı, bölgenin ana havaalanıdır ve yurt içi ve yurt dışı uçuşlar için kullanılır.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/Ege,+Dalaman+Havaliman%C4%B1,+Dalaman%2FMu%C4%9Fla/@36.7228066,28.7743855,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c0715d8f83456f:0xcaf246be6efae4da!2m2!1d28.7933172!2d36.7181305?entry=ttu'
+                desc: 'Dalaman Havalimanı, bölgeye ulaşım sağlayan ana havalimanıdır. İç ve dış hatlar uçuşları düzenlenmektedir.',
+                map: 'https://www.google.com/maps/dir//Dalaman+Havalimanı/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c0724ab7623661:0x2e161adb28e9e131?sa=X&ved=2ahUKEwjM2pK3jZ_xAhVJr6QKHVu_AboQ9RcwEHoECEkQBQ'
             },
             yuvarlak: {
                 title: 'Yuvarlak Çay',
                 img1: 'yuvarlak1.jpg',
                 img2: 'yuvarlak2.jpg',
-                desc: 'Yuvarlak Çay, doğal güzellikleri ve serinletici suları ile ünlü bir piknik ve yüzme alanıdır.',
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/P%C4%B1nar,+Yuvarlak%C3%A7ay,+K%C3%B6yce%C4%9Fiz%2FMu%C4%9Fla/@36.8838796,28.7261546,12.25z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c087752de3c3c7:0x2e57062e86dd0219!2m2!1d28.8102535!2d36.9377255?entry=ttu'
+                desc: 'Yuvarlak Çay, doğal güzelliği ve serin suyu ile bilinen bir doğa harikasıdır. Piknik ve doğa yürüyüşleri için idealdir.',
+                map: 'https://www.google.com/maps/dir//Yuvarlak+%C3%87ay/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x14c0724ab7623661:0x2e161adb28e9e131?sa=X&ved=2ahUKEwjM2pK3jZ_xAhVJr6QKHVu_AboQ9RcwEHoECEkQBQ'
             }
         };
 
-        function showInfo(placeKey) {
-            const place = places[placeKey];
-            document.getElementById('place-title').innerText = place.title;
-            document.getElementById('place-img1').src = place.img1;
-            document.getElementById('place-img2').src = place.img2;
-            document.getElementById('place-desc').innerText = place.desc;
-            document.getElementById('place-map').href = place.map;
+        function showInfo(place) {
+            const info = places[place];
+            document.getElementById('place-title').textContent = info.title;
+            document.getElementById('place-img1').src = info.img1;
+            document.getElementById('place-img2').src = info.img2;
+            document.getElementById('place-desc').textContent = info.desc;
+            document.getElementById('place-map').href = info.map;
             document.getElementById('place-info').style.display = 'block';
         }
     </script>
