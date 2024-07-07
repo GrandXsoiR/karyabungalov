@@ -3,227 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dalaman Ve Çevresinde Görülecek Yerler</title>
+    <title>Dalaman ve Çevresinde Görülecek Yerler</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 20px;
-            background: rgba(255, 255, 255, 0.5) url('background.png') no-repeat center center fixed;
+            text-align: center;
+            background-image: url('background.png');
             background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5); /* %50 şeffaf arka plan */
         }
         h1 {
-            color: #333;
-            text-align: center;
             font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
         }
         .button-container {
-            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
         .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            background-color: rgba(255, 255, 255, 0.75);
-            color: #333;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
             width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.75); /* %75 şeffaf butonlar */
+            color: #333;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
         }
         .button-container button:hover {
             background-color: rgba(255, 255, 255, 0.9);
-            color: #000;
         }
-        .place-info {
-            display: none;
-            margin-top: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        .button-container button span::before {
+            content: "• ";
         }
-        .place-info img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-        }
-        .place-info a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #4caf50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .place-info a:hover {
-            background-color: #45a049;
-        }
-        .language-buttons {
+        .flag-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             display: flex;
-            justify-content: flex-end;
             gap: 10px;
         }
-        .language-buttons button {
+        .flag-buttons button {
             width: 30px;
             height: 20px;
             border: none;
-            cursor: pointer;
             background-size: cover;
+            cursor: pointer;
         }
-        .language-buttons button:hover {
-            opacity: 0.8;
+        #place-info {
+            display: none;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #place-info img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        #place-info a {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+        #place-info a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="language-buttons">
-        <button onclick="setLanguage('tr')" style="background-image: url('turkish.png');"></button>
-        <button onclick="setLanguage('en')" style="background-image: url('english.png');"></button>
-        <button onclick="setLanguage('ru')" style="background-image: url('russian.png');"></button>
-        <button onclick="setLanguage('de')" style="background-image: url('german.png');"></button>
+    <div class="flag-buttons">
+        <button style="background-image: url('turkish-flag.png');" onclick="changeLanguage('tr')"></button>
+        <button style="background-image: url('english-flag.png');" onclick="changeLanguage('en')"></button>
+        <button style="background-image: url('russian-flag.png');" onclick="changeLanguage('ru')"></button>
+        <button style="background-image: url('german-flag.png');" onclick="changeLanguage('de')"></button>
     </div>
-
-    <h1 id="main-title">Dalaman Ve Çevresinde Görülecek Yerler</h1>
-    
+    <h1>Dalaman ve Çevresinde Görülecek Yerler</h1>
     <div class="button-container">
-        <button onclick="showInfo('sarsala')">Sarsala Koyu</button>
-        <button onclick="showInfo('sarigerme')">Sarıgerme Plajı</button>
-        <button onclick="showInfo('kayacik')">Kayacık Sahili</button>
-        <button onclick="showInfo('gocek')">Göcek Marina</button>
-        <button onclick="showInfo('dalyan')">Dalyan</button>
-        <button onclick="showInfo('kaunos')">Kaunos Antik Kenti</button>
-        <button onclick="showInfo('iztuzu')">İztuzu Plajı</button>
-        <button onclick="showInfo('kille')">Kille Koyu</button>
-        <button onclick="showInfo('kukurt')">Kükürt Kaplıcaları</button>
-        <button onclick="showInfo('market')">En Yakın Market</button>
-        <button onclick="showInfo('havalimani')">Dalaman Havalimanı</button>
-        <button onclick="showInfo('yuvarlak')">Yuvarlak Çay</button>
+        <button onclick="showInfo('sarsala')"><span>Sarsala Koyu</span></button>
+        <button onclick="showInfo('kayacik')"><span>Kayacık Sahili</span></button>
+        <button onclick="showInfo('gocek')"><span>Göcek Marina</span></button>
+        <button onclick="showInfo('dalyan')"><span>Dalyan</span></button>
+        <button onclick="showInfo('kaunos')"><span>Kaunos Antik Kenti</span></button>
+        <button onclick="showInfo('iztuzu')"><span>İztuzu Plajı</span></button>
+        <button onclick="showInfo('kille')"><span>Kille Koyu</span></button>
+        <button onclick="showInfo('kukurt')"><span>Kükürt Kaplıcaları</span></button>
+        <button onclick="showInfo('market')"><span>En Yakın Market</span></button>
+        <button onclick="showInfo('havalimani')"><span>Dalaman Havalimanı</span></button>
+        <button onclick="showInfo('yuvarlak')"><span>Yuvarlak Çay</span></button>
     </div>
-
-    <div id="place-info" class="place-info">
+    <div id="place-info">
         <h2 id="place-title"></h2>
         <img id="place-img1" src="" alt="">
         <img id="place-img2" src="" alt="">
         <p id="place-desc"></p>
-        <a id="place-map" href="" target="_blank">Konumu Görüntüle</a>
+        <a id="place-map" href="#" target="_blank">Konum</a>
     </div>
 
     <script>
         const places = {
             sarsala: {
-                title: { tr: 'Sarsala Koyu', en: 'Sarsala Bay', ru: 'Залив Сарсала', de: 'Sarsala Bucht' },
+                title: {
+                    tr: 'Sarsala Koyu',
+                    en: 'Sarsala Bay',
+                    ru: 'Бухта Сарсала',
+                    de: 'Sarsala-Bucht'
+                },
                 img1: 'sarsala1.jpg',
                 img2: 'sarsala2.jpg',
                 desc: {
-                    tr: 'Sarsala Koyu, Dalaman\'da bulunan ve doğal güzellikleriyle ünlü bir koydur. Plajı ve berrak denizi ile ziyaretçilerin ilgisini çeker.',
-                    en: 'Sarsala Bay is a famous bay in Dalaman known for its natural beauty. The beach and clear sea attract visitors.',
-                    ru: 'Залив Сарсала - знаменитый залив в Даламан, известный своей природной красотой. Пляж и чистое море привлекают посетителей.',
-                    de: 'Die Sarsala-Bucht ist eine berühmte Bucht in Dalaman, die für ihre natürliche Schönheit bekannt ist. Der Strand und das klare Meer ziehen Besucher an.'
+                    tr: 'Sarsala Koyu, doğa ile iç içe, berrak denizi ve sakin ortamı ile ünlüdür.',
+                    en: 'Sarsala Bay is famous for its crystal-clear sea and peaceful environment.',
+                    ru: 'Бухта Сарсала славится своим кристально чистым морем и спокойной атмосферой.',
+                    de: 'Die Sarsala-Bucht ist berühmt für ihr kristallklares Meer und ihre ruhige Umgebung.'
                 },
-                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+Sarsala+Koyu,+48770+Dalaman%2FMu%C4%9Fla/@36.6635742,28.8090142,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0727079a6ac03:0xef8abe1ffe588960!2m2!1d28.8502137!2d36.6635124?hl=tr&entry=ttu'
-            },
-            sarigerme: {
-                title: { tr: 'Sarıgerme Plajı', en: 'Sarigerme Beach', ru: 'Пляж Саригерме', de: 'Sarigerme Strand' },
-                img1: 'sarigerme1.jpg',
-                img2: 'sarigerme2.jpg',
-                desc: {
-                    tr: 'Sarıgerme Plajı, geniş kumsalı ve temiz denizi ile ünlüdür. Su sporları ve diğer aktiviteler için ideal bir mekandır.',
-                    en: 'Sarigerme Beach is famous for its wide sandy beach and clean sea. It is an ideal place for water sports and other activities.',
-                    ru: 'Пляж Саригерме славится своим широким песчаным пляжем и чистым морем. Это идеальное место для водных видов спорта и других активностей.',
-                    de: 'Der Sarigerme-Strand ist berühmt für seinen breiten Sandstrand und das saubere Meer. Es ist ein idealer Ort für Wassersport und andere Aktivitäten.'
-                },
-                map: 'https://www.google.com/maps/dir/36.7218384,28.7780983/sar%C4%B1germe/@36.7376546,28.6654068,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14c075bf2c01f925:0xfc8821371c89732!2m2!1d28.701944!2d36.71?entry=ttu'
+                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+Sarsala+Sahili,+Sarsala+Koyu,+Dalaman%2FMu%C4%9Fla/@36.6635742,28.8090142,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0727079a6ac03:0xef8abe1ffe588960!2m2!1d28.8502137!2d36.6635124?hl=tr&entry=ttu'
             },
             kayacik: {
-                title: { tr: 'Kayacık Sahili', en: 'Kayacik Beach', ru: 'Пляж Каяджик', de: 'Kayacik Strand' },
+                title: {
+                    tr: 'Kayacık Sahili',
+                    en: 'Kayacik Beach',
+                    ru: 'Пляж Каяджик',
+                    de: 'Kayacik Strand'
+                },
                 img1: 'kayacik1.jpg',
                 img2: 'kayacik2.jpg',
                 desc: {
-                    tr: 'Kayacık Sahili, sakin ve huzurlu bir ortam sunar. Denizin tadını çıkarabileceğiniz güzel bir sahildir.',
-                    en: 'Kayacik Beach offers a calm and peaceful environment. It is a beautiful beach where you can enjoy the sea.',
-                    ru: 'Пляж Каяджик предлагает спокойную и умиротворяющую атмосферу. Это красивый пляж, где можно насладиться морем.',
-                    de: 'Der Kayacik-Strand bietet eine ruhige und friedliche Umgebung. Es ist ein schöner Strand, an dem man das Meer genießen kann.'
+                    tr: 'Kayacık Sahili, sakin ve huzurlu bir ortam sunar. Yüzme ve güneşlenme için mükemmeldir.',
+                    en: 'Kayacik Beach offers a quiet and peaceful environment. It is perfect for swimming and sunbathing.',
+                    ru: 'Пляж Каяджик предлагает тихую и спокойную обстановку. Это идеальное место для купания и загорания.',
+                    de: 'Der Kayacik Strand bietet eine ruhige und friedliche Umgebung. Er ist perfekt zum Schwimmen und Sonnenbaden.'
                 },
-                map: 'https://www.google.com/maps/dir/36.707799,28.7884621/Kayac%C4%B1k+Beach,+Kapukarg%C4%B1n,+48770+Dalaman%2FMu%C4%9Fla/@36.7047385,28.7905892,15z/data=!4m13!1m4!3m3!1s0x14c072fdf8c69d51:0xef8abe1ffe588960!2sKapukarg%C4%B1n,+48770+Dalaman%2FMu%C4%9Fla!3b1!4m7!1m0!1m5!1m1!1s0x14c072fdf8c69d51:0x48c7b3a7616b74a7!2m2!1d28.791667!2d36.704352?entry=ttu'
+                map: 'https://www.google.com/maps/dir//Kapukarg%C4%B1n,+Kayac%C4%B1k+Sahili,+Dalaman%2FMu%C4%9Fla/@36.6871159,28.7452264,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c07385b073f42f:0x2fd3476c55016890!2m2!1d28.7864259!2d36.6870542?hl=tr&entry=ttu'
             },
             gocek: {
-                title: { tr: 'Göcek Marina', en: 'Gocek Marina', ru: 'Марина Гочек', de: 'Gocek Marina' },
+                title: {
+                    tr: 'Göcek Marina',
+                    en: 'Gocek Marina',
+                    ru: 'Марина Гечек',
+                    de: 'Göcek Marina'
+                },
                 img1: 'gocek1.jpg',
                 img2: 'gocek2.jpg',
                 desc: {
-                    tr: 'Göcek Marina, yatçılar için popüler bir destinasyondur. Modern olanaklar ve güzel manzaralar sunar.',
-                    en: 'Gocek Marina is a popular destination for yachtsmen. It offers modern facilities and beautiful views.',
-                    ru: 'Марина Гочек - популярное место для яхтсменов. Он предлагает современные удобства и красивые виды.',
-                    de: 'Die Gocek Marina ist ein beliebtes Ziel für Segler. Es bietet moderne Einrichtungen und schöne Aussichten.'
+                    tr: 'Göcek Marina, lüks yatlar ve tekneler için popüler bir durak noktasıdır. Çevresinde birçok restoran ve kafe bulunmaktadır.',
+                    en: 'Gocek Marina is a popular stop for luxury yachts and boats. There are many restaurants and cafes around it.',
+                    ru: 'Марина Гечек - популярная остановка для роскошных яхт и лодок. Вокруг него много ресторанов и кафе.',
+                    de: 'Die Göcek Marina ist ein beliebter Anlaufpunkt für Luxusjachten und Boote. In der Umgebung gibt es viele Restaurants und Cafés.'
                 },
-                map: 'https://www.google.com/maps/dir//G%C3%B6cek+Marina,+G%C3%B6cek,+Fethiye%2FMu%C4%9Fla/@36.751435,28.9400851,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0708bced6c5e9:0x5e86c4f3a9ff9b6a!2m2!1d28.926731!2d36.751457?entry=ttu'
+                map: 'https://www.google.com/maps/dir//G%C3%B6cek+Marina,+G%C3%B6cek,+Fethiye/Mu%C4%9Fla/@36.7554277,28.9387847,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c072a236fa9d6f:0x22bc7d55d92a6cf3!2m2!1d28.9799842!2d36.755366?hl=tr&entry=ttu'
             },
             dalyan: {
-                title: { tr: 'Dalyan', en: 'Dalyan', ru: 'Дальян', de: 'Dalyan' },
+                title: {
+                    tr: 'Dalyan',
+                    en: 'Dalyan',
+                    ru: 'Дальян',
+                    de: 'Dalyan'
+                },
                 img1: 'dalyan1.jpg',
                 img2: 'dalyan2.jpg',
                 desc: {
-                    tr: 'Dalyan, doğa harikası bir beldedir. Kaya mezarları ve İztuzu Plajı ile ünlüdür.',
-                    en: 'Dalyan is a natural wonder. It is famous for its rock tombs and Iztuzu Beach.',
-                    ru: 'Дальян - природное чудо. Он славится своими скальными гробницами и пляжем Изтузу.',
-                    de: 'Dalyan ist ein Naturwunder. Es ist berühmt für seine Felsengräber und den Iztuzu-Strand.'
+                    tr: 'Dalyan, doğa harikaları ve antik kalıntıları ile ünlüdür. Tekne turları ile keşfedilebilir.',
+                    en: 'Dalyan is famous for its natural wonders and ancient ruins. It can be explored with boat tours.',
+                    ru: 'Дальян славится своими природными чудесами и древними руинами. Его можно исследовать на лодочных экскурсиях.',
+                    de: 'Dalyan ist bekannt für seine Naturwunder und antiken Ruinen. Es kann mit Bootstouren erkundet werden.'
                 },
-                map: 'https://www.google.com/maps/dir//Dalyan,+Ortaca%2FMu%C4%9Fla/@36.8345023,28.6428342,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c071e0ed9973eb:0x21c1c6b3f0eb5d12!2m2!1d28.644119!2d36.834505?entry=ttu'
+                map: 'https://www.google.com/maps/dir//Dalyan,+Ortaca%2FMu%C4%9Fla/@36.8343409,28.6351109,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c03099d4ecdb2f:0xc1d5f6ea91d9dd42!2m2!1d28.6763104!2d36.8342797?hl=tr&entry=ttu'
             },
             kaunos: {
-                title: { tr: 'Kaunos Antik Kenti', en: 'Kaunos Ancient City', ru: 'Древний город Каунос', de: 'Antike Stadt Kaunos' },
+                title: {
+                    tr: 'Kaunos Antik Kenti',
+                    en: 'Kaunos Ancient City',
+                    ru: 'Древний город Каунос',
+                    de: 'Antike Stadt Kaunos'
+                },
                 img1: 'kaunos1.jpg',
                 img2: 'kaunos2.jpg',
                 desc: {
-                    tr: 'Kaunos Antik Kenti, tarihi ve arkeolojik öneme sahip bir antik kenttir. Ziyaretçilerine eşsiz bir deneyim sunar.',
-                    en: 'Kaunos Ancient City is an ancient city of historical and archaeological significance. It offers a unique experience to visitors.',
-                    ru: 'Древний город Каунос - это древний город с историческим и археологическим значением. Он предлагает уникальный опыт для посетителей.',
-                    de: 'Die antike Stadt Kaunos ist eine antike Stadt von historischer und archäologischer Bedeutung. Sie bietet Besuchern ein einzigartiges Erlebnis.'
+                    tr: 'Kaunos Antik Kenti, tarihi kalıntıları ve kral mezarları ile ünlüdür. Dalyan\'dan tekne ile ulaşılabilir.',
+                    en: 'Kaunos Ancient City is famous for its historical ruins and king tombs. It can be reached by boat from Dalyan.',
+                    ru: 'Древний город Каунос славится своими историческими руинами и царскими гробницами. До него можно добраться на лодке из Дальяна.',
+                    de: 'Die antike Stadt Kaunos ist berühmt für ihre historischen Ruinen und Königsgräber. Sie ist mit dem Boot von Dalyan aus erreichbar.'
                 },
-                map: 'https://www.google.com/maps/dir//Kaunos+Antik+Kenti,+Kaunos+Sk.,+Ortaca%2FMu%C4%9Fla/@36.834795,28.6374282,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c071a2294d2fc5:0x4d63a59e2c8e4575!2m2!1d28.637428!2d36.834795?entry=ttu'
+                map: 'https://www.google.com/maps/dir//Kaunos+Antik+Kenti,+Kaunos,+Dalyan%2FOrtaca%2FMu%C4%9Fla/@36.8353314,28.6212605,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c03099875f784b:0x5a55e12ac2497bce!2m2!1d28.66246!2d36.83527?hl=tr&entry=ttu'
+            },
+            iztuzu: {
+                title: {
+                    tr: 'İztuzu Plajı',
+                    en: 'Iztuzu Beach',
+                    ru: 'Пляж Изтузу',
+                    de: 'Iztuzu-Strand'
+                },
+                img1: 'iztuzu1.jpg',
+                img2: 'iztuzu2.jpg',
+                desc: {
+                    tr: 'İztuzu Plajı, caretta carettaların yumurtlama alanı olarak bilinir. İnce kumlu plajı ile ünlüdür.',
+                    en: 'Iztuzu Beach is known as a nesting area for caretta carettas. It is famous for its fine sandy beach.',
+                    ru: 'Пляж Изтузу известен как место гнездования черепах каретта-каретта. Он славится своим мелким песчаным пляжем.',
+                    de: 'Der Iztuzu-Strand ist als Nistplatz für Caretta-Carettas bekannt. Er ist berühmt für seinen feinen Sandstrand.'
+                },
+                map: 'https://www.google.com/maps/dir//Dalyan+Ortaca,+Dalyan+Ortaca+Iztuzu+Plaj%C4%B1,+Ortaca%2FMu%C4%9Fla/@36.8072856,28.6075306,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c030fa06f2e10f:0x4c26d7bff266208b!2m2!1d28.6487301!2d36.8072244?hl=tr&entry=ttu'
+            },
+            kille: {
+                title: {
+                    tr: 'Kille Koyu',
+                    en: 'Kille Bay',
+                    ru: 'Бухта Килле',
+                    de: 'Kille-Bucht'
+                },
+                img1: 'kille1.jpg',
+                img2: 'kille2.jpg',
+                desc: {
+                    tr: 'Kille Koyu, doğayla iç içe bir tatil geçirmek isteyenler için mükemmel bir yerdir. Denizi oldukça temizdir.',
+                    en: 'Kille Bay is a perfect place for those who want to spend a holiday intertwined with nature. Its sea is very clean.',
+                    ru: 'Бухта Килле - идеальное место для тех, кто хочет провести отпуск на природе. Ее море очень чистое.',
+                    de: 'Die Kille-Bucht ist ein perfekter Ort für diejenigen, die einen Urlaub inmitten der Natur verbringen möchten. Ihr Meer ist sehr sauber.'
+                },
+                map: 'https://www.google.com/maps/dir//G%C3%B6cek,+Kille+Koyu,+Mu%C4%9Fla/@36.7070646,28.903254,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c0724f98c78d7b:0xf1883e0ed946eeff!2m2!1d28.9444535!2d36.7070033?hl=tr&entry=ttu'
+            },
+            kukurt: {
+                title: {
+                    tr: 'Kükürt Kaplıcaları',
+                    en: 'Sulfur Hot Springs',
+                    ru: 'Серные горячие источники',
+                    de: 'Schwefelquellen'
+                },
+                img1: 'kukurt1.jpg',
+                img2: 'kukurt2.jpg',
+                desc: {
+                    tr: 'Kükürt Kaplıcaları, sağlık turizmi için popüler bir destinasyondur. Kaplıcaların suları şifalı olarak bilinir.',
+                    en: 'Sulfur Hot Springs is a popular destination for health tourism. The waters of the hot springs are known to be healing.',
+                    ru: 'Серные горячие источники - популярное место для оздоровительного туризма. Воды горячих источников известны своим лечебным эффектом.',
+                    de: 'Die Schwefelquellen sind ein beliebtes Ziel für Gesundheitstourismus. Die Wasser der Quellen sind für ihre heilende Wirkung bekannt.'
+                },
+                map: 'https://www.google.com/maps/dir//K%C3%BCk%C3%BCrt+Kapl%C4%B1calar%C4%B1,+Dalyan,+Ortaca%2FMu%C4%9Fla/@36.8031435,28.6126416,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14c030fb335d2b8b:0x72e95db95e261be8!2m2!1d28.6538411!2d36.8030823?hl=tr&entry=ttu'
+            },
+            market: {
+                title: {
+                    tr: 'En Yakın Market',
+                    en: 'Nearest Market',
+                    ru: 'Ближайший магазин',
+                    de: 'Nächster Markt'
+                },
+                img1: 'market1.jpg',
+                img2: 'market2.jpg',
+                desc: {
+                    tr: 'En yakın marketten tüm ihtiyaçlarınızı karşılayabilirsiniz. Market, tatilciler için geniş bir ürün yelpazesi sunar.',
+                    en: 'You can meet all your needs at the nearest market. The market offers a wide range of products for holidaymakers.',
+                    ru: 'Вы можете удовлетворить все свои потребности в ближайшем магазине. Магазин предлагает широкий ассортимент товаров для отдыхающих.',
+                    de: 'Auf dem nächsten Markt können Sie all Ihre Bedürfnisse erfüllen. Der Markt bietet eine breite Palette von Produkten für Urlauber.'
+                },
+                map: 'https://www.google.com/maps/search/market/@36.708,28.934,13z?hl=tr'
+            },
+            boatTour: {
+                title: {
+                    tr: 'Tekne Turu',
+                    en: 'Boat Tour',
+                    ru: 'Лодочный тур',
+                    de: 'Bootstour'
+                },
+                img1: 'boattour1.jpg',
+                img2: 'boattour2.jpg',
+                desc: {
+                    tr: 'Göcek ve çevresindeki koyları keşfetmek için tekne turları idealdir. Günlük turlar düzenlenmektedir.',
+                    en: 'Boat tours are ideal for exploring the coves around Göcek. Daily tours are organized.',
+                    ru: 'Лодочные туры - идеальный способ исследовать бухты вокруг Гёчека. Ежедневно организуются экскурсии.',
+                    de: 'Bootstouren sind ideal, um die Buchten rund um Göcek zu erkunden. Tägliche Touren werden organisiert.'
+                },
+                map: 'https://www.google.com/maps/search/tekne+tur/@36.708,28.934,13z?hl=tr'
+            },
+            kayak: {
+                title: {
+                    tr: 'Deniz Kayağı',
+                    en: 'Sea Kayaking',
+                    ru: 'Морской каякинг',
+                    de: 'Seekajakfahren'
+                },
+                img1: 'kayak1.jpg',
+                img2: 'kayak2.jpg',
+                desc: {
+                    tr: 'Deniz kayağı, Göcek ve çevresindeki koyları yakından keşfetmek için harika bir yoldur. Kiralama imkanları bulunmaktadır.',
+                    en: 'Sea kayaking is a great way to explore the coves around Göcek up close. Rental options are available.',
+                    ru: 'Морской каякинг - отличный способ исследовать бухты вокруг Гёчека. Доступны варианты аренды.',
+                    de: 'Seekajakfahren ist eine großartige Möglichkeit, die Buchten rund um Göcek aus nächster Nähe zu erkunden. Mietmöglichkeiten sind vorhanden.'
+                },
+                map: 'https://www.google.com/maps/search/deniz+kayağı/@36.708,28.934,13z?hl=tr'
             }
         };
-
-        function showInfo(placeKey) {
-            const place = places[placeKey];
-            document.getElementById('place-title').innerText = place.title[language];
-            document.getElementById('place-img1').src = place.img1;
-            document.getElementById('place-img2').src = place.img2;
-            document.getElementById('place-desc').innerText = place.desc[language];
-            document.getElementById('place-map').href = place.map;
-
-            const placeInfoDiv = document.getElementById('place-info');
-            placeInfoDiv.style.display = 'block';
-            placeInfoDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        let language = 'tr';
-
-        function setLanguage(lang) {
-            language = lang;
-            document.getElementById('main-title').innerText = {
-                tr: 'Dalaman Ve Çevresinde Görülecek Yerler',
-                en: 'Places to Visit Around Dalaman',
-                ru: 'Места для посещения вокруг Даламана',
-                de: 'Sehenswürdigkeiten rund um Dalaman'
-            }[lang];
-
-            document.querySelectorAll('.button-container button').forEach((button, index) => {
-                const placeKey = Object.keys(places)[index];
-                button.innerText = places[placeKey].title[lang];
-            });
-
-            const currentPlaceKey = document.getElementById('place-title').getAttribute('data-place-key');
-            if (currentPlaceKey) {
-                showInfo(currentPlaceKey);
-            }
+        
+        const locales = ['tr', 'en', 'ru', 'de'];
+        const defaultLocale = 'tr';
+        
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const place = urlParams.get('place');
+        const locale = locales.includes(urlParams.get('locale')) ? urlParams.get('locale') : defaultLocale;
+        
+        const placeData = places[place];
+        
+        if (placeData) {
+            document.querySelector('.place-title').innerText = placeData.title[locale];
+            document.querySelector('.place-img1').src = placeData.img1;
+            document.querySelector('.place-img2').src = placeData.img2;
+            document.querySelector('.place-desc').innerText = placeData.desc[locale];
+            document.querySelector('.place-map a').href = placeData.map;
+        } else {
+            document.querySelector('.place-details').innerText = locale === 'tr' ? 'Böyle bir yer bulunamadı.' : locale === 'en' ? 'No such place found.' : locale === 'ru' ? 'Такое место не найдено.' : 'Ein solcher Ort wurde nicht gefunden.';
         }
     </script>
 </body>
